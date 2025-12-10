@@ -1,0 +1,6 @@
+streamlit
+leafmap
+numpy
+matplotlib
+pillow
+folium
