@@ -10,14 +10,19 @@ st.title("CRC MSAVI2 2011 and 2016 Greenness Viewer")
 # 1) Load MASVI2 TIFF (relative path is cloud safe)
 # ---------------------------------------------------
 # Paths to your local GeoTIFFs
+import rasterio
+
 tif_2011 = "data/msavi2_2011.tif"
 tif_2016 = "data/msavi2_2016.tif"
 
-img_2011 = Image.open(tif_2011)
-arr_2011 = np.array(img_2011)
+def load_tif(path):
+    with rasterio.open(path) as src:
+        arr = src.read(1)
+    return arr
 
-img_2016 = Image.open(tif_2016)
-arr_2016 = np.array(img_2016)
+arr_2011 = load_tif(tif_2011)
+arr_2016 = load_tif(tif_2016)
+
 
 # ---------------------------------------------------
 # 2) Geospatial Bounds
@@ -123,3 +128,4 @@ axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
 st.pyplot(fig)
+
