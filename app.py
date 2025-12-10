@@ -61,19 +61,26 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 colormap = msavi2_colors  
 
 # Compute min/max from data
-vmin = float(np.nanmin(arr_2011))
-vmax = float(np.nanmax(arr_2011))
+vmin = float(min(np.nanmin(arr_2011), np.nanmin(arr_2016)))
+vmax = float(max(np.nanmax(arr_2011), np.nanmax(arr_2016)))
 
-# Build split map
+# Ensure bounds are valid (leafmap needs finite numbers)
+vmin = max(vmin, -2)   # clamp if needed
+vmax = min(vmax, 2)
+
+m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
+
 m.split_map(
     left_layer=tif_2011,
     right_layer=tif_2016,
     left_label="MSAVI2 2011",
     right_label="MSAVI2 2016",
-    colormap="RdYlGn",   # works for continuous rasters
+    colormap="RdYlGn",   # excellent for vegetation
     vmin=vmin,
     vmax=vmax
 )
+
+m.to_streamlit(height=500)
 
 
 
