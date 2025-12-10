@@ -60,16 +60,21 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 # MSAVI2 colormap
 colormap = msavi2_colors  
 
-# Create the split map
+# Compute min/max from data
+vmin = float(np.nanmin(arr_2011))
+vmax = float(np.nanmax(arr_2011))
+
+# Build split map
 m.split_map(
     left_layer=tif_2011,
     right_layer=tif_2016,
     left_label="MSAVI2 2011",
     right_label="MSAVI2 2016",
-    colormap="virdis",
-    vmin=-1,
-    vmax=1
+    colormap="RdYlGn",   # works for continuous rasters
+    vmin=vmin,
+    vmax=vmax
 )
+
 
 
 # ---------------------------------------------------
@@ -128,4 +133,3 @@ axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
 st.pyplot(fig)
-
