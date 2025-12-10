@@ -30,7 +30,7 @@ arr_2016 = load_tif(tif_2016)
 left = -109.68235475076204
 bottom = 38.14046200423928
 right = -109.64917234159395
-top =: 38.164365710444315
+top = 38.164365710444315
 
 bounds = [[bottom, left], [top, right]]
 
@@ -128,3 +128,4 @@ axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
 st.pyplot(fig)
+
